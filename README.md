@@ -8,4 +8,4 @@ This is a simple, skeleton application using the Zend2 + Doctrine2(ODM) + Mongod
                             for Athenaaaaaaaaaaaaaaa!!!
                             ---------------------------
 
-                                            [jorgeley@gmail.com](mailto:jorgeley@gmail.com)
+                                            [Jorgeley](jorgeley@gmail.com)

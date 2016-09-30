@@ -1,0 +1,10 @@
+<?php
+    echo $this->partial("index");
+    if ($this->knight): ?>
+        <script>
+            $("#id").val("<?=$this->knight->getId()?>");
+            $("#name").val("<?=$this->knight->getName()?>");
+            $("#armor").val("<?=$this->knight->getArmor()?>");
+        </script> <?php
+    endif;
+?>

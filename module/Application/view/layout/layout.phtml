@@ -1,0 +1,124 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle($this->translate('Saint Seya'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/cavaleirosZodiaco.ico'))
+                        ->prependStylesheet($this->basePath('css/style.css'))
+                        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+                        ->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath('js/bootstrap.min.js'))
+            ->prependFile($this->basePath('js/jquery.min.js'))
+            ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/cavaleirosZodiaco32.jpg') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Saint Seya') ?></a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            
+            <div class="jumbotron">
+                <img src="<?=$this->basePath('img/saintseya.jpg')?>" style="float:left;margin-right:10px">
+                <h1><?php echo sprintf($this->translate('Saint %sSeya%s'), '<span class="zf-green">', '</span>') ?></h1>
+                <p><?php echo sprintf($this->translate('Este é um simples projeto exemplo usando as tecnologias Zend2 + Doctrine2(ODM) + Mongodb.<br>'
+                                                        .'<i>This is a simple sample project using the technologies Zend2 + Doctrine2(ODM) + Mongodb.</i>')) ?></p>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><?php echo $this->translate('+Add Zodiac Knight') ?></h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- the knight form -->
+                            <form class="form-inline" method="post" action="<?=$this->basePath('save')?>">
+                                <input type="hidden" name="id" id="id">
+                                <label for="name">Name
+                                    <input class="form-control" type="text" name="name" id="name" placeholder="knight name" required>
+                                </label>
+                                <label for="armor">Armor
+                                    <input class="form-control" type="text" name="armor" id="armor" placeholder="knight armor">
+                                </label>
+                                <input class="form-control" type="submit" value="save">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><?php echo $this->translate('Zodiac Knights') ?></h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- the knights grid -->
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Cavaleiro / Knight</th>
+                                            <th>Armadura / Armor</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                        if ($this->knights):
+                                            foreach ($this->knights as $knight):
+                                                echo "<tr>"
+                                                        ."<td>" .$knight->getName(). "</td>"
+                                                        ."<td>" .$knight->getArmor(). "</td>"
+                                                        ."<td><a href='" .$this->basePath("edit/".$knight->getId()). "'>...</a></td>"
+                                                        ."<td><a href='" .$this->basePath("delete/".$knight->getId()). "'>X</a></td>"
+                                                    ."</tr>";
+                                            endforeach;
+                                        endif;
+                                    ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <?php echo $this->content; ?>
+            <hr>
+            <footer>
+                <p>contact me:  <a href="http://github.com/jorgeley">Github</a> / <a href="mailto:jorgeley@gmail.com">jorgeley@gmail.com</a></p>
+            </footer>
+        </div> <!-- /container -->
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>
